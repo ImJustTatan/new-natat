@@ -2,7 +2,7 @@ import os # for env vars
 import discord
 from discord.ext import commands
 
-token = os.environ.get('TOKEN', None)
+token = os.environ.get('TOKEN')
 bot = commands.Bot(command_prefix='$')
 
 @bot.event
