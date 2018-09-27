@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 
 token = os.environ.get('TOKEN')
+print('token: {}'.format(token))
 bot = commands.Bot(command_prefix='$')
 
 @bot.event
