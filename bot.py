@@ -30,7 +30,12 @@ async def config(ctx):
 @config.command()
 async def play(ctx, *, playing: str):
     await ctx.send('now playing ' + playing)
-    gameStat = discord.Game(name=playing)
-    await bot.change_presence(game=gameStat)
+    gameStat = discord.Game(playing)
+    await bot.change_presence(activity=gameStat)
+   
+@config.command()
+async def say(ctx, *, echo: str):
+    await ctx.message.delete()
+    await ctx.send(echo)
 
 bot.run(token)
