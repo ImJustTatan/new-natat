@@ -2,6 +2,8 @@ import os # for env vars
 import discord
 from discord.ext import commands
 
+tatanID = 119205994579492864
+adminID = 494693989853954048
 token = os.environ.get('TOKEN')
 print('token: {}'.format(token))
 bot = commands.Bot(command_prefix='>')
@@ -26,5 +28,9 @@ async def config(ctx):
             pass
     else:
         await ctx.send("don\'t fuckin touch my configs")
+
+@config.command()
+async def play(ctx, *, playing: str):
+    await ctx.send('now playing ' + playing)
 
 bot.run(token)
