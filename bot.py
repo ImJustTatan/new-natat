@@ -6,7 +6,7 @@ tatanID = 119205994579492864
 adminID = 494693989853954048
 token = os.environ.get('TOKEN')
 print('token: {}'.format(token))
-bot = commands.Bot(command_prefix='..')
+bot = commands.Bot(command_prefix='!')
 
 @bot.event
 async def on_ready():
@@ -22,7 +22,7 @@ async def greet(ctx):
 @bot.command()
 async def help(ctx):
     await ctx.send("some commands have been sent your way")
-    await ctx.author.send("```\nCOMMANDS\n--------\n\n..greet: me greet\n```")
+    await ctx.author.send("```COMMANDS\n--------\n\n..greet: me greet```")
 
 @bot.group()
 async def config(ctx):
