@@ -19,11 +19,6 @@ async def on_ready():
 async def greet(ctx):
     await ctx.send("boyyoass")
     
-@bot.command()
-async def help(ctx):
-    await ctx.send("some commands have been sent your way")
-    await ctx.author.send("```COMMANDS\n--------\n\n..greet: me greet```")
-
 @bot.group()
 async def config(ctx):
     if ctx.author.id == tatanID:
