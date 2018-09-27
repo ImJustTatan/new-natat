@@ -21,16 +21,15 @@ async def greet(ctx):
 
 @bot.group()
 async def config(ctx):
-    if ctx.user.id == tatanID:
+    if ctx.author.id == tatanID:
         if ctx.invoked_subcommand is None:
             await ctx.send("no subcommand was called")
-        else:
-            pass
     else:
         await ctx.send("don\'t fuckin touch my configs")
 
 @config.command()
 async def play(ctx, *, playing: str):
     await ctx.send('now playing ' + playing)
+    await client.change_presence(game=discord.Game(name=playing))
 
 bot.run(token)
