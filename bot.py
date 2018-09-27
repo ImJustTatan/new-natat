@@ -6,7 +6,7 @@ tatanID = 119205994579492864
 adminID = 494693989853954048
 token = os.environ.get('TOKEN')
 print('token: {}'.format(token))
-bot = commands.Bot(command_prefix='>')
+bot = commands.Bot(command_prefix='..')
 
 @bot.event
 async def on_ready():
@@ -18,6 +18,11 @@ async def on_ready():
 @bot.command()
 async def greet(ctx):
     await ctx.send("boyyoass")
+    
+@bot.command()
+async def help(ctx):
+    await ctx.send("some commands have been sent your way")
+    await ctx.author.send("```\nCOMMANDS\n--------\n\n..greet: me greet\n```")
 
 @bot.group()
 async def config(ctx):
@@ -30,6 +35,7 @@ async def config(ctx):
 @config.command()
 async def play(ctx, *, playing: str):
     await ctx.send('now playing ' + playing)
-    await client.change_presence(game=discord.Game(name=playing))
+    gameStat = discord.Game(name=playing)
+    await bot.change_presence(game=gameStat)
 
 bot.run(token)
