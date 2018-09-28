@@ -13,7 +13,7 @@ adminID = 494693989853954048
 guildID = 290144092841836556
 
 token = os.environ.get('TOKEN')
-copypasta = os.environ.get('COPYPASTA')
+copypasta = str(os.environ.get('COPYPASTA'))
 bot = commands.Bot(command_prefix='!', owner_id=tatanID, 
 				   description='i\'m natat and i am suffering every second i\'m on')
 
@@ -23,7 +23,7 @@ for extension in initial_extensions:
 fyou = ['fuck off', 'fuck you',
 		'stop it', 'im gonna kill you',
 		'that\'s fuckin illegal man',
-		'can you not', 'STOP', str(copypasta)]
+		'can you not', 'STOP', copypasta]
 
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 				 'v:', 'kek', 'soy boy' 'soy boi',
