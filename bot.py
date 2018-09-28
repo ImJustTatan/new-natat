@@ -1,30 +1,33 @@
 import os # for env vars
 import discord
 from discord.ext import commands
-from random import choice
+import random
 
 import sys, traceback
 
-initial_extensions = ['cogs.config']
+initial_extensions = ['cogs.config',
+					  'cogs.useless']
 
 tatanID = 119205994579492864
 adminID = 494693989853954048
 guildID = 290144092841836556
 
 token = os.environ.get('TOKEN')
-bot = commands.Bot(command_prefix='!', owner_id=tatanID, description='tatan\'s bot.')
+copypasta = os.environ.get('COPYPASTA')
+bot = commands.Bot(command_prefix='!', owner_id=tatanID, 
+				   description='i\'m natat and i am suffering every second i\'m on')
 
-if __name__ == '__main__':
-	for extension in initial_extensions:
-		try:
-			bot.load_extension(extension)
-		except Exception as e:
-			print(f'Failed to load extension {extension}.', file=sys.stderr)
-			traceback.print_exc()
+for extension in initial_extensions:
+	bot.load_extension(extension)
 
 fyou = ['fuck off', 'fuck you',
-		'stop it', 'im gonna kill you']
-print(fyou)
+		'stop it', 'im gonna kill you',
+		'that\'s fuckin illegal man',
+		'can you not', 'STOP', str(copypasta)]
+
+illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
+				 'v:', 'kek', 'soy boy' 'soy boi',
+				 'soyboi', 'fagget', '>mfw', '>tfw']
 
 def docstring_parameter(*sub):
 	"""useful function for using variables in docstrings
@@ -43,16 +46,15 @@ async def on_ready():
 	
 @bot.event
 async def on_message(msg):
-	if ':v' in msg.content:
-		await msg.channel.send(':gun:')
-		await msg.author.send(choice(fyou))
+	for word in illegal_words:
+		if word in msg.content.lower():
+			if msg.author != bot.user:
+				await msg.channel.send(random.choice([':gun:', ':knife:', ':dagger:']))
+				await msg.author.send(random.choice(fyou))
+				await msg.delete()
+			else:
+				pass
 	
 	await bot.process_commands(msg)
-
-greet_aliases = ['hello', 'salute', 'test']
-@bot.command(description='A simple command for testing the bot.', aliases=greet_aliases)
-async def greet(ctx):
-	"""Greets you."""
-	await ctx.send(choice(["boyyoass", "heyo", "what do you want"]))
 
 bot.run(token)

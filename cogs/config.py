@@ -1,3 +1,5 @@
+"""All configuration commands for the bot. Restricted use for certain roles/users."""
+
 import discord
 from discord.ext import commands
 
@@ -7,8 +9,8 @@ class Configurations:
 
 	@commands.group(name='config', aliases=['conf', 'settings', 'set'])
 	@commands.has_role('Owners')
-		async def config(ctx):
-		"""Configuration commands. Only tatan can access them."""
+	async def config(ctx):
+		"""Configuration commands. Only the Owners can access them."""
 		if ctx.author.id == tatanID:
 			if ctx.invoked_subcommand is None:
 				await ctx.send("no subcommand was called")
@@ -24,7 +26,7 @@ class Configurations:
 
 	@config.command()
 	async def stream(ctx, *, streaming: str):
-		"""Changes the bot's "playing" status. [BROKEN]"""
+		"""Changes the bot's "streaming" status. [BROKEN]"""
 		await ctx.send('now streaming ' + streaming.lower())
 		streamStat = discord.Game(name=streaming, type=1, url='https://twitch.tv/tatanphnx')
 		await bot.change_presence(activity=streamStat)
@@ -41,5 +43,17 @@ class Configurations:
 		await ctx.send('ima go bye')
 		exit()
 
+	@commands.command(aliases=['load'])
+	@commands.is_owner()
+	async def cog_load(self, ctx, *, cog: str):
+		"""Loads a module/cog."""
+		self.bot.load_extension(cog)
+
+	@commands.command(aliases=['unload'])
+	@commands.is_owner()
+	async def cog_unload(self, ctx, *, cog: str):
+		"""Unloads a module/cog."""
+		self.bot.unload_extension(cog)
+
 def setup(bot):
-bot.add_cog(Configurations(bot))
+	bot.add_cog(Configurations(bot))
