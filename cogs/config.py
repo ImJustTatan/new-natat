@@ -5,7 +5,8 @@ class Configurations:
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.group(name='config', aliases=['conf', 'settings', 'set'])
+	@commands.group(name='config', pass_context=True,
+					aliases=['conf', 'settings', 'set'])
 	@commands.has_role('Owners')
 	async def config(ctx):
 		"""Configuration commands. Only the Owners can access them."""

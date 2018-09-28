@@ -13,7 +13,6 @@ adminID = 494693989853954048
 guildID = 290144092841836556
 
 token = os.environ.get('TOKEN')
-copypasta = str(os.environ.get('COPYPASTA'))
 bot = commands.Bot(command_prefix='!', owner_id=tatanID, 
 				   description='i\'m natat and i am suffering every second i\'m on')
 
@@ -23,7 +22,7 @@ for extension in initial_extensions:
 fyou = ['fuck off', 'fuck you',
 		'stop it', 'im gonna kill you',
 		'that\'s fuckin illegal man',
-		'can you not', 'STOP', copypasta]
+		'can you not', 'STOP']
 
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 				 'v:', 'kek', 'soy boy' 'soy boi',
@@ -46,6 +45,8 @@ async def on_ready():
 	
 @bot.event
 async def on_message(msg):
+
+	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
 			if msg.author != bot.user:
