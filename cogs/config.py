@@ -16,18 +16,18 @@ class Configurations:
 			await ctx.send("don\'t fuckin touch my configs")
 
 	@config.command()
-	async def play(ctx, *, game: str):
+	async def play(self, ctx, *, game: str):
 		"""Changes the bot's "playing" status."""
 		await ctx.send('now playing ' + game.lower())
 		gameStat = discord.Game(game)
-		await bot.change_presence(activity=gameStat)
+		await self.bot.change_presence(activity=gameStat)
 
 	@config.command()
-	async def stream(ctx, *, streaming: str):
+	async def stream(self, ctx, *, streaming: str):
 		"""Changes the bot's "streaming" status. [BROKEN]"""
 		await ctx.send('now streaming ' + streaming.lower())
 		streamStat = discord.Game(name=streaming, type=1, url='https://twitch.tv/tatanphnx')
-		await bot.change_presence(activity=streamStat)
+		await self.bot.change_presence(activity=streamStat)
 
 	@config.command(aliases=['echo', 'reply'])
 	async def say(ctx, *, message: str):
