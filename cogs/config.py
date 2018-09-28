@@ -9,11 +9,8 @@ class Configurations:
 	@commands.has_role('Owners')
 	async def config(ctx):
 		"""Configuration commands. Only the Owners can access them."""
-		if ctx.author.id == tatanID:
-			if ctx.invoked_subcommand is None:
-				await ctx.send("no subcommand was called")
-		else:
-			await ctx.send("don\'t fuckin touch my configs")
+		if ctx.invoked_subcommand is None:
+			await ctx.send("no subcommand was called")
 
 	@config.command()
 	async def play(self, ctx, *, game: str):

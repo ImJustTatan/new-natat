@@ -11,11 +11,5 @@ class Fun:
 		"""Greets you. Mainly used for testing."""
 		await ctx.send(random.choice(["boyyoass", "heyo", "what do you want"]))
 
-	@commands.command(name='8ball', description='Gives out a random choice between many user-given strings.\nClosing two or more words in quotes will count as one string.\n\nFor example: !8ball a b c will give a random choice between "a", "b" and "c". !8ball "a b" c  will give a random choice between the strings "a b" and "c".', aliases=['choices', 'rng', 'random'])
-	async def eightball(ctx, *args):
-		"""Gives out a random choice between user-given strings. [BROKEN]"""
-		choices = list(args)
-		await ctx.send(random.choice(choices))
-
 def setup(bot):
 	bot.add_cog(Fun(bot))
