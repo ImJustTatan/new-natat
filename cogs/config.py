@@ -1,5 +1,3 @@
-"""All configuration commands for the bot. Restricted use for certain roles/users."""
-
 import discord
 from discord.ext import commands
 
