@@ -6,7 +6,8 @@ import random
 import sys, traceback
 
 initial_extensions = ['cogs.config',
-					  'cogs.useless']
+			 'cogs.useless',
+			 'cogs.members']
 
 tatanID = 119205994579492864
 adminID = 494693989853954048
@@ -19,14 +20,17 @@ bot = commands.Bot(command_prefix='!', owner_id=tatanID,
 for extension in initial_extensions:
 	bot.load_extension(extension)
 
+tatanID = bot.get_user(tatanID)
+
 fyou = ['fuck off', 'fuck you',
-		'stop it', 'im gonna kill you',
-		'that\'s fuckin illegal man',
-		'can you not', 'STOP']
+	 'stop it', 'im gonna kill you',
+	 'that\'s fuckin illegal man',
+	 'can you not', 'STOP']
 
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
-				 'v:', 'kek', 'soy boy' 'soy boi',
-				 'soyboi', 'fagget', '>mfw', '>tfw']
+		   'v:', 'kek', 'soy boy' 'soy boi',
+		   'soyboi', 'fagget', '>mfw', '>tfw',
+		   'soi boi']
 
 def docstring_parameter(*sub):
 	"""useful function for using variables in docstrings
