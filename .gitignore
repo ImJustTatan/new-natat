@@ -5,6 +5,10 @@ __pycache__/
 
 # Heroku
 *.env
+log/
+*.mp3
+*.webm
+*.dll
 
 # C extensions
 *.so
