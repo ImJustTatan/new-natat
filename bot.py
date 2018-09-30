@@ -6,8 +6,9 @@ import random
 import sys, traceback
 
 initial_extensions = ['cogs.config',
-			 'cogs.useless',
-			 'cogs.members']
+			 'cogs.members',
+			 'cogs.music',
+			 'cogs.useless']
 
 tatanID = 119205994579492864
 adminID = 494693989853954048
@@ -62,4 +63,4 @@ async def on_message(msg):
 	
 	await bot.process_commands(msg)
 
-bot.run(token)
+bot.run('NDk0NjM0NjkzNzQwODU1MzE3.Do2Zbg.753pnS5AmtumhjaHRKoO4hugRwM')
