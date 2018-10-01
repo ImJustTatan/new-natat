@@ -7,7 +7,6 @@ import sys, traceback
 
 initial_extensions = ['cogs.config',
 			 'cogs.members',
-			 'cogs.music',
 			 'cogs.useless']
 
 tatanID = 119205994579492864

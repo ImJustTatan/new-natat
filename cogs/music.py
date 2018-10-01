@@ -9,8 +9,6 @@ from youtube_dl import YoutubeDL
 thdown = '\U0001F44E'
 thup = '\U0001F44D'
 
-discord.opus.load_opus('libopus-0.dll')
-
 ydl = YoutubeDL()
 ydl.add_default_info_extractors()
 class Music:
