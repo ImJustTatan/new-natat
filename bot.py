@@ -46,6 +46,8 @@ async def on_ready():
 	print(bot.user.name)
 	print(bot.user.id)
 	print('------')
+	gameStat = discord.Game('!help')
+	await self.bot.change_presence(activity=gameStat)
 	
 @bot.event
 async def on_message(msg):

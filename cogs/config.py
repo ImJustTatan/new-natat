@@ -21,11 +21,17 @@ class Configurations:
 			await ct.send("no debug command was called")
 
 	@config.command()
-	async def play(self, ctx, *, game: str):
+	async def play(self, ctx, *, game: str = 'help'):
 		"""Changes the bot's "playing" status."""
 		await ctx.send('now playing ' + game.lower())
 		gameStat = discord.Game(game)
 		await self.bot.change_presence(activity=gameStat)
+		
+	@config.command()
+	async def stream(self, ctx, *, game: str = '!help', url: str = 'https://twitch.tv/tatanphnx'):
+		"""Changes the bot's "streaming" status."""
+		streamStat = discord.Streaming(game, url)
+		await self.bot.change_presence(activity=streamStat)
 
 	@config.command(aliases=['echo', 'reply'])
 	async def say(self, ctx, *, message: str):
