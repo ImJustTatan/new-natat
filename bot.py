@@ -32,6 +32,8 @@ illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'soyboi', 'fagget', '>mfw', '>tfw',
 		   'soi boi']
 
+motd = ['A'*7,'tatan shut me down','how i had die']
+
 def docstring_parameter(*sub):
 	"""useful function for using variables in docstrings
 	i.e. @docstring_parameter(fyou)"""
@@ -46,12 +48,21 @@ async def on_ready():
 	print(bot.user.name)
 	print(bot.user.id)
 	print('------')
-	gameStat = discord.Game('!help')
-	await self.bot.change_presence(activity=gameStat)
+	
+	gameStat = discord.Game(f'!help | {random.choice(motd)}')
+	await bot.change_presence(activity=gameStat)
+	
+@bot.event
+async def on_member_join(member):
+	# spambot kicker
+	if 'discord.gg' in member.name:
+		await member.ban(reason='spambot')
+	else:
+		welcome_message = f'hello {member.name.lower()} and welcome to hr285\'s (aka tatan) server. read the law and have fun.'
+		await member.send(welcome_message)
 	
 @bot.event
 async def on_message(msg):
-
 	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
