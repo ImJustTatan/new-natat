@@ -2,6 +2,7 @@ import os # for env vars
 import discord
 from discord.ext import commands
 import random
+import asyncio
 
 import sys, traceback
 
@@ -42,21 +43,22 @@ def docstring_parameter(*sub):
 		return obj
 	return dec
 
+async def status_task(sec=1200):
+	"""Changes status every X seconds."""
+	while True:
+		gameStat = discord.Game(f'!help | {random.choice(motd)}')
+		await bot.change_presence(activity=gameStat)
+		await asyncio.sleep(int(sec))
+
 @bot.event
-async def on_ready():
+asyncedef on_ready():
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
-	print('------')
+	print('------
+	bot.loop.status_task()')
 	
-	gameStat = discord.Game(f'!help | {random.choice(motd)}')
-	await bot.change_presence(activity=gameStat)
-	
-@bot.event
-async def on_member_join(member):
-	# spambot kicker
-	if 'discord.gg' in member.name:
-		await member.ban(reason='spambot')
+ember.ban(reason='spambot')
 	else:
 		welcome_message = f'hello {member.name.lower()} and welcome to hr285\'s (aka tatan) server. read the law and have fun.'
 		await member.send(welcome_message)
