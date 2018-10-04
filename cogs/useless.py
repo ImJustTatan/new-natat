@@ -36,19 +36,20 @@ class Fun:
 		if id is None:
 			error_desc = 'specify a pokemon you fuck'
 			error_msg = discord.Embed(title='an error occured',description=error_desc,colour=0xe74c3c)
-			ctx.send(embed=error_msg)
+			await ctx.send(embed=error_msg)
 		else:
 			pdmon = pb.pokemon(id)
-			pdex_title = f'Pokédex Entry: {pdmon.name}'
+			pdex_title = f'Pokédex Entry'
+			pdex_desc = f'pokédex info on the pokémon {pdmon.name}'
 			pdex_thumb = pb.SpriteResource('pokemon',id)
 			
 			pdex_em = discord.Embed(title=pdex_title,colour=0x1f8b4c)
 			pdex_em.set_thumbnail(pdex_thumb.url)
 			pdex_em.add_field('Entry:',f'#{pdmon.id}')
-			pdex_em.add_field('Type:',pdmon.type)
+			pdex_em.add_field('Type:',pb.type_(id))
 			pdex_em.add_field('Height:',f'{pdmon.height}ft.')
 			
-			ctx.send(embed=pdex_em)
+			await ctx.send(embed=pdex_em)
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

@@ -51,14 +51,17 @@ async def status_task(sec=1200):
 		await asyncio.sleep(int(sec))
 
 @bot.event
-asyncedef on_ready():
+async def on_ready():
 	print('Logged in as')
 	print(bot.user.name)
 	print(bot.user.id)
-	print('------
-	bot.loop.status_task()')
+	print('------')
+	bot.loop.status_task()
 	
-ember.ban(reason='spambot')
+@bot.event
+async def on_member_joined(member):
+	if 'discord.gg' in member.name.lower():
+		await member.ban(reason='spambot')
 	else:
 		welcome_message = f'hello {member.name.lower()} and welcome to hr285\'s (aka tatan) server. read the law and have fun.'
 		await member.send(welcome_message)
