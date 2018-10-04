@@ -33,6 +33,7 @@ class Fun:
 	
 	@commands.command(aliases=['pokemon','pokebase'])
 	async def pokedex(self, ctx, id = None):
+		"""Retrieves a Pokémon with info."""
 		if id is None:
 			error_desc = 'specify a pokemon you fuck'
 			error_msg = discord.Embed(title='an error occured',description=error_desc,colour=0xe74c3c)
@@ -44,7 +45,7 @@ class Fun:
 			pdex_thumb = pb.SpriteResource('pokemon',id)
 			
 			pdex_em = discord.Embed(title=pdex_title,colour=0x1f8b4c)
-			pdex_em.set_thumbnail(pdex_thumb.url)
+			# pdex_em.set_thumbnail(pdex_thumb.url)
 			pdex_em.add_field('Entry:',f'#{pdmon.id}')
 			pdex_em.add_field('Type:',pb.type_(id))
 			pdex_em.add_field('Height:',f'{pdmon.height}ft.')
