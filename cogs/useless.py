@@ -46,9 +46,9 @@ class Fun:
 			
 			pdex_em = discord.Embed(title=pdex_title,colour=0x1f8b4c)
 			# pdex_em.set_thumbnail(pdex_thumb.url)
-			pdex_em.add_field('Entry:',f'#{pdmon.id}')
-			pdex_em.add_field('Type:',pb.type_(id))
-			pdex_em.add_field('Height:',f'{pdmon.height}ft.')
+			pdex_em.add_field(name='Entry:',value=f'#{pdmon.id}')
+			pdex_em.add_field(name='Type:',value=pb.type_(id))
+			pdex_em.add_field(name='Height:',value=f'{pdmon.height}ft.')
 			
 			await ctx.send(embed=pdex_em)
 

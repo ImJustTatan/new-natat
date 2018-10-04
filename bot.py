@@ -56,7 +56,7 @@ async def on_ready():
 	print(bot.user.name)
 	print(bot.user.id)
 	print('------')
-	bot.loop.status_task()
+	bot.loop.create_task(status_task())
 	
 @bot.event
 async def on_member_joined(member):
