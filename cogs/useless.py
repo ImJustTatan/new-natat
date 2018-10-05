@@ -42,10 +42,9 @@ class Fun:
 			pdmon = pb.pokemon(id)
 			pdex_title = f'Pokédex Entry'
 			pdex_desc = f'pokédex info on the pokémon {pdmon.name}'
-			pdex_thumb = f'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pdmon.id}.png'
 			
-			pdex_em = discord.Embed(title=pdex_title,colour=0x1f8b4c)
-			pdex_em.set_thumbnail(pdex_thumb)
+			pdex_em = discord.Embed(title=pdex_title,colour=ctx.author.colour)
+			pdex_em.set_thumbnail(f'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{pdmon.id}.png')
 			pdex_em.add_field(name='Entry:',value=f'#{pdmon.id}')
 			pdex_em.add_field(name='Type:',value=pb.type_(pdmon.id))
 			pdex_em.add_field(name='Height:',value=f'{pdmon.height}ft.')
