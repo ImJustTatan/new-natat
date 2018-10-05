@@ -41,8 +41,7 @@ class Fun:
 	@commands.group(aliases=['wiki','wp'])
 	async def wikipedia(self, ctx):
 		if ctx.invoked_subcommand is None:
-			error_d = 'this is a fuckin subcommand, idiot.'+
-			' can\'t you just do !help wp or something?'
+			error_d = 'this is a fuckin subcommand, idiot. can\'t you just do !help wp or something?'
 			await ctx.send(embed=error_embed(error_d))
 			
 	@wikipedia.command(aliases=['s','find'])
@@ -55,18 +54,18 @@ class Fun:
 			
 			counter = 0
 			res_content = 'results:\n'
-			for result in search_results:
+			for s_result in search_results:
 				counter += 1
-				res_content += f'\n{counter}.- {result.lower()}'
+				res_content += f'\n{counter}.- {s_result.lower()}'
 			await ctx.send(res_content)
 		
-	# pokemon
+	pokemon
 	
 	@commands.command(aliases=['pokemon','pokebase'])
 	async def pokedex(self, ctx, id = None):
 		"""Retrieves a Pokémon with info."""
 		if id is None:
-			error_d = 'specify a pokemon you fuck'
+		error_d = 'specify a pokemon you fuck'
 			await ctx.send(embed=error_embed(error_d))
 		else:
 			pdmon = pb.pokemon(id)
