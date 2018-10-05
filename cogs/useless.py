@@ -9,6 +9,8 @@ def error_embed(error_desc: str, error_title: str = 'an error occured'):
 	"""Returns an error-themed Embed. Basically just a shortcut."""
 	return discord.Embed(title=error_title,description=error_desc,colour=0xe74c3c)
 
+wiki_lang = 'en'
+
 class Fun:
 	def __init__(self, bot):
 		self.bot = bot
@@ -41,6 +43,8 @@ class Fun:
 	@commands.group(aliases=['wiki','wp'])
 	async def wikipedia(self, ctx, language: str):
 		"""Wikipedia based command. Do !help wp."""
+		global wiki_lang
+		wiki_lang = language
 		wikipedia.set_lang(language)
 		if ctx.invoked_subcommand is None:
 			error_d = 'this is a fuckin subcommand, idiot. can\'t you just do !help wp or something?'
@@ -60,8 +64,9 @@ class Fun:
 			for s_result in search_results:
 				counter += 1
 				res_content.add_field(name=f'result #{counter}',value=f'{s_result}',inline=False)
+			global wiki_lang
 			res_content.set_author(name=f'requested by {ctx.author.name}',icon_url=ctx.author.avatar_url)
-			res_content.set_footer(text='choose an article to show.')
+			res_content.set_footer(text=f'choose an article to show. | current language: {wiki_lang}')
 			await ctx.send(embed=res_content)
 		
 	# pokemon
