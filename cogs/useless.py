@@ -50,6 +50,28 @@ class Fun:
 			error_d = 'this is a fuckin subcommand, idiot. can\'t you just do !help wp or something?'
 			await ctx.send(embed=error_embed(error_d))
 			
+	@wikipedia.command(aliases=['a','page'])
+	async def article(self, ctx, article_name: str):
+		"""Shows an article from the provided name."""
+		article_obj = wikipedia.suggest(article_name)
+		if article_obj is None:
+			error_d = f'no page returned with "{article_name.lower()}", check your spelling or something.'
+			await ctx.send(embed=error_embed(error_d))
+		else:
+			article_em = discord.Embed(title=article_obj.title,colour=ctx.author.colour,url=article_obj.url)
+			
+			article_em.set_author(name=f'requested by {ctx.author.name}',icon_url=ctx.author.avatar_url)
+			article_em.set_image(article_obj.images[0])
+			
+			article_em.add_field(name='Summary:', value=article_obj.summary, inline=False)
+			category_str = ', '.join(article_obj.categories)
+			article_em.add_field(name='Categories:', value=category_str)
+			
+			global wiki_lang
+			article_em.set_footer(text=f'current language: {wiki_lang}', icon_url=self.bot.user.avatar_url)
+			
+			await ctx.send(embed=article_em)
+			
 	@wikipedia.command(aliases=['s','find'])
 	async def search(self, ctx, *, user_search: str = 'null', result_limit: int = 10):
 		"""Wikipedia article searcher."""
@@ -59,14 +81,14 @@ class Fun:
 		else:
 			search_results = wikipedia.search(user_search,results=result_limit)
 			
-			counter = 0
+			counter = -1
 			res_content = discord.Embed(title=f'Results for {user_search}:',colour=ctx.author.colour)
 			for s_result in search_results:
 				counter += 1
 				res_content.add_field(name=f'result #{counter}',value=f'{s_result}',inline=False)
 			global wiki_lang
 			res_content.set_author(name=f'requested by {ctx.author.name}',icon_url=ctx.author.avatar_url)
-			res_content.set_footer(text=f'choose an article to show. | current language: {wiki_lang}')
+			res_content.set_footer(text=f'choose an article to show. | current language: {wiki_lang}', icon_url=self.bot.user.avatar_url)
 			await ctx.send(embed=res_content)
 		
 	# pokemon
