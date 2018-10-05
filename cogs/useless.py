@@ -59,7 +59,7 @@ class Fun:
 				res_content += f'\n{counter}.- {s_result.lower()}'
 			await ctx.send(res_content)
 		
-	pokemon
+	# pokemon
 	
 	@commands.command(aliases=['pokemon','pokebase'])
 	async def pokedex(self, ctx, id = None):
