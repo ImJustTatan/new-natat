@@ -53,11 +53,13 @@ class Fun:
 			search_results = wikipedia.search(user_search,results=result_limit)
 			
 			counter = 0
-			res_content = 'results:\n'
+			res_content = discord.Embed(title=f'Results for {user_search}:',colour=ctx.author.colour)
 			for s_result in search_results:
 				counter += 1
-				res_content += f'\n{counter}.- {s_result.lower()}'
-			await ctx.send(res_content)
+				res_content.add_field(name=f'result #{counter}',value=f'{s_result.lower()}',inline=False)
+			res_content.set_author(name=f'requested by {ctx.author.name}',icon_url=ctx.author.avatar_url)
+			res_content.set_footer(text='choose an article to show.')
+			await ctx.send(embed=res_content)
 		
 	# pokemon
 	
