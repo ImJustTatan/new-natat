@@ -57,7 +57,7 @@ class Fun:
 			res_content = 'results:\n'
 			for result in search_results:
 				counter += 1
-				res_content += f'\n{counter}.- {content.lower()}'
+				res_content += f'\n{counter}.- {result.lower()}'
 			await ctx.send(res_content)
 		
 	# pokemon
