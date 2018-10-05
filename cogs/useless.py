@@ -65,7 +65,7 @@ class Fun:
 	async def pokedex(self, ctx, id = None):
 		"""Retrieves a Pokémon with info."""
 		if id is None:
-		error_d = 'specify a pokemon you fuck'
+			error_d = 'specify a pokemon you fuck'
 			await ctx.send(embed=error_embed(error_d))
 		else:
 			pdmon = pb.pokemon(id)
