@@ -51,9 +51,9 @@ class Fun:
 			await ctx.send(embed=error_embed(error_d))
 			
 	@wikipedia.command(aliases=['a','page'])
-	async def article(self, ctx, article_name: str):
+	async def article(self, ctx, *, article_name: str):
 		"""Shows an article from the provided name."""
-		article_obj = wikipedia.suggest(article_name)
+		article_obj = wikipedia.page(article_name)
 		if article_obj is None:
 			error_d = f'no page returned with "{article_name.lower()}", check your spelling or something.'
 			await ctx.send(embed=error_embed(error_d))
