@@ -39,13 +39,16 @@ class Fun:
 	# wikipedia
 	
 	@commands.group(aliases=['wiki','wp'])
-	async def wikipedia(self, ctx):
+	async def wikipedia(self, ctx, language: str):
+		"""Wikipedia based command. Do !help wp."""
+		wikipedia.set_lang(language)
 		if ctx.invoked_subcommand is None:
 			error_d = 'this is a fuckin subcommand, idiot. can\'t you just do !help wp or something?'
 			await ctx.send(embed=error_embed(error_d))
 			
 	@wikipedia.command(aliases=['s','find'])
 	async def search(self, ctx, *, user_search: str = 'null', result_limit: int = 10):
+		"""Wikipedia article searcher."""
 		if user_search is 'null':
 			error_d = 'uhh will you search for something or what.'
 			await ctx.send(embed=error_embed(error_d))
@@ -56,7 +59,7 @@ class Fun:
 			res_content = discord.Embed(title=f'Results for {user_search}:',colour=ctx.author.colour)
 			for s_result in search_results:
 				counter += 1
-				res_content.add_field(name=f'result #{counter}',value=f'{s_result.lower()}',inline=False)
+				res_content.add_field(name=f'result #{counter}',value=f'{s_result}',inline=False)
 			res_content.set_author(name=f'requested by {ctx.author.name}',icon_url=ctx.author.avatar_url)
 			res_content.set_footer(text='choose an article to show.')
 			await ctx.send(embed=res_content)
