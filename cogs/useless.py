@@ -44,8 +44,12 @@ class Fun:
 	async def wikipedia(self, ctx, language: str):
 		"""Wikipedia based command. Do !help wp."""
 		global wiki_lang
-		wiki_lang = language
-		wikipedia.set_lang(language)
+		if language in wikipedia.languages():
+			wiki_lang = language
+			wikipedia.set_lang(language)
+		else:
+			error_d = f'"{language}" isn\'t in the list of languages.'
+			ctx.send(embed=error_embed(error_d))
 		if ctx.invoked_subcommand is None:
 			error_d = 'this is a fuckin subcommand, idiot. can\'t you just do !help wp or something?'
 			await ctx.send(embed=error_embed(error_d))
@@ -53,7 +57,7 @@ class Fun:
 	@wikipedia.command(aliases=['a','p','article'])
 	async def page(self, ctx, *, article_name: str):
 		"""Shows an article from the provided name."""
-		article_obj = wikipedia.page(title=article_name)
+		article_obj = wikipedia.page(article_name)
 		if article_obj is None:
 			error_d = f'no page returned with "{article_name.lower()}", check your spelling or something.'
 			await ctx.send(embed=error_embed(error_d))
