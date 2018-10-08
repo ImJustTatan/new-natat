@@ -23,10 +23,11 @@ for extension in initial_extensions:
 
 tatanID = bot.get_user(tatanID)
 
+cpasta = os.environ.get('COPYPASTA')
 fyou = ['fuck off', 'fuck you',
 	 'stop it', 'im gonna kill you',
 	 'that\'s fuckin illegal man',
-	 'can you not', 'STOP']
+	 'can you not', 'STOP', cpasta]
 
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'v:', 'kek', 'soy boy' 'soy boi',
