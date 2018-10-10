@@ -1,10 +1,11 @@
-import os # for env vars
 import discord
 from discord.ext import commands
+
+import os # for env vars
 import random
 import asyncio
-
 import sys, traceback
+import json
 
 initial_extensions = ['cogs.config',
 			 'cogs.members',
@@ -15,6 +16,11 @@ adminID = 494693989853954048
 guildID = 290144092841836556
 
 token = os.environ.get('TOKEN')
+if token is None:
+	with open('config.json') as j:
+		config = json.load(j)
+		token = config['token']
+
 bot = commands.Bot(command_prefix='!', owner_id=tatanID, 
 				   description='i\'m natat and i am suffering every second i\'m on')
 
@@ -24,6 +30,12 @@ for extension in initial_extensions:
 tatanID = bot.get_user(tatanID)
 
 cpasta = os.environ.get('COPYPASTA')
+if cpasta is None:
+	with open('config.json') as j:
+		config = json.load(j)
+		token = config['token']
+		cpasta = config['copypasta']
+
 fyou = ['fuck off', 'fuck you',
 	 'stop it', 'im gonna kill you',
 	 'that\'s fuckin illegal man',
