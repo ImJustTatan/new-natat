@@ -12,8 +12,8 @@ initial_extensions = ['cogs.config',
 			 'cogs.useless']
 
 tatanID = 119205994579492864
-adminID = 494693989853954048
-guildID = 290144092841836556
+adminID = 504803538518671374
+guildID = 504412544673251337
 
 token = os.environ.get('TOKEN')
 if token is None:
