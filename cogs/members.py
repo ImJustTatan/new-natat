@@ -15,9 +15,11 @@ class Members:
 
 	@commands.command(aliases=['pfp', 'profilepic', 'avatarpic', 
 				      'pic', 'userpic'])
-	async def avatar(self, ctx, *, member: discord.Member):
+	async def avatar(self, ctx, *, member: discord.Member = None):
 		"""Messages a member's avatar url back."""
-		if member != ctx.author:
+		if member is None:
+			await ctx.send(content=f'here\'s your uglyass avatar {ctx.author.avatar_url}')
+		else:
 			await ctx.send(content=f'here\'s {member.display_name}\'s uglyass avatar {member.avatar_url}')
 def setup(bot):
 	bot.add_cog(Members(bot))
