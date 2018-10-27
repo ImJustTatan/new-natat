@@ -1,24 +1,28 @@
 import discord
 from discord.ext import commands
 
+from useful import error_embed
+
 class Configurations:
 	def __init__(self, bot):
 		self.bot = bot
 
 	@commands.group(name='config', pass_context=True,
-			  aliases=['conf', 'settings', 'set'])
-	@commands.has_role('Owners')
+			  aliases=['conf', 'cf', 'settings', 'set'])
+	@commands.has_role('Owner')
 	async def config(self, ctx):
 		"""Configuration commands. Only the Owners can access them."""
 		if ctx.invoked_subcommand is None:
-			await ctx.send("no subcommand was called")
+			error_d = "no subcommand was called"
+			await ctx.send(embed=error_embed(error_d))
 
 	@commands.group(aliases=['db','dbg'])
 	@commands.is_owner()
 	async def debug(self, ctx):
 		"""Debug commands for debugging bugs."""
 		if ctx.invoked_subcommand is None:
-			await ct.send("no debug command was called")
+			error_d = "no debug command was called"
+			await ctx.send(embed=error_embed(error_d))
 
 	@config.command()
 	async def play(self, ctx, *, game: str = 'help'):
@@ -39,7 +43,7 @@ class Configurations:
 		await ctx.message.delete()
 		await ctx.send(message)
 
-	@config.command(aliases=['sleep', 'exit'])
+	@config.command(aliases=['cl','sleep', 'exit'])
 	async def close(self, ctx):
 		"""Shuts down the bot."""
 		await ctx.send('ima go bye')

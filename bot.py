@@ -9,7 +9,8 @@ import json
 
 initial_extensions = ['cogs.config',
 			 'cogs.members',
-			 'cogs.useless']
+			 'cogs.useless',
+			 'cogs.apis']
 
 tatanID = 119205994579492864
 adminID = 504803538518671374
@@ -47,14 +48,6 @@ illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'soi boi']
 
 motd = ['A'*7,'tatan shut me down','how i had die']
-
-def docstring_parameter(*sub):
-	"""useful function for using variables in docstrings
-	i.e. @docstring_parameter(fyou)"""
-	def dec(obj):
-		obj.__doc__ = obj.__doc__.format(*sub)
-		return obj
-	return dec
 
 async def status_task(sec=1200):
 	"""Changes status every X seconds."""
