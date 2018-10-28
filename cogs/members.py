@@ -15,9 +15,9 @@ class Members:
 	async def joined(self, ctx, *, member: discord.Member = None):
 		"""Says when a member joined."""
 		if member is None:
-			await ctx.send(f'you joined on {ctx.author.joined_at}')
+			await ctx.send(f'you joined on {ctx.author.joined_at - 9}')
 		else:
-			await ctx.send(f'{member.display_name} joined on {member.joined_at}')
+			await ctx.send(f'{member.display_name} joined on {member.joined_at - 9}')
 
 	@commands.command(aliases=['pfp', 'profilepic', 'avatarpic', 
 				      'pic', 'userpic'])
