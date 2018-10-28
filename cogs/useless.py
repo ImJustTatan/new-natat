@@ -26,7 +26,7 @@ class Fun:
 				await ctx.send(content='meow',file=img)
 		else:
 			error_d = f'"{format}" is not a valid format, dumbass.'
-			ctx.send(embed=error_embed(error_d))
+			await ctx.send(embed=error_embed(error_d))
 
 	@commands.command(description='A simple command for testing the bot.', 
 			    aliases=['hello', 'salute', 'test'])
