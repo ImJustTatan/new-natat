@@ -5,6 +5,7 @@ from useful import error_embed, str_limit
 
 import os
 import json
+import random
 
 import wikipedia
 import lyricsgenius as genius
