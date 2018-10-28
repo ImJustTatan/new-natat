@@ -15,12 +15,16 @@ class Fun:
 	@commands.command(aliases=['randomcat'])
 	async def cat(self, ctx):
 		async with ctx.channel.typing():
-			async with self.session.get('https://aws.random.cat/meow') as data:
-				img_data = json.loads(data)
-				async with self.session.get(img_data["file"]) as resp:
-					buffer = BytesIO(await resp.read())
-					img_obj = discord.File(fp=buffer, filename='cat.png')
-					await ctx.send(content='meow', file=img_obj)
+			try:
+				async with self.session.get('https://aws.random.cat/meow') as data:
+					img_data = json.loads(data)
+					async with self.session.get(img_data["file"]) as resp:
+						buffer = BytesIO(await resp.read())
+						img_obj = discord.File(fp=buffer, filename='cat.png')
+						await ctx.send(content='meow', file=img_obj)
+			except Exception as e:
+				error_d = str_limit(str(e)))
+				await ctx.send(embed=error_embed(error_d))
 
 	@commands.command(description='A simple command for testing the bot.', 
 			    aliases=['hello', 'salute', 'test'])
