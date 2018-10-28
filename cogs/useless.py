@@ -23,7 +23,7 @@ class Fun:
 						img_obj = discord.File(fp=buffer, filename='cat.png')
 						await ctx.send(content='meow', file=img_obj)
 			except Exception as e:
-				error_d = str_limit(str(e)))
+				error_d = str_limit(str(e.message)))
 				await ctx.send(embed=error_embed(error_d))
 
 	@commands.command(description='A simple command for testing the bot.', 
