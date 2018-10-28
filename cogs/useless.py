@@ -1,13 +1,26 @@
 import discord
 from discord.ext import commands
+import aiohttp
 
 from useful import error_embed, str_limit
 
 import random
+from io import BytesIO
 
 class Fun:
 	def __init__(self, bot):
 		self.bot = bot
+		self.session = aiohttp.ClientSession(loop=bot.loop)
+		
+	@commands.command(aliases=['randomcat'])
+	async def cat(self, ctx):
+		async with ctx.channel.typing():
+			async with self.session.get('https://aws.random.cat/meow') as data:
+				img_data = json.loads(data)
+				async with self.session.get(img_data["file"]) as resp:
+					buffer = BytesIO(await resp.read())
+					img_obj = discord.File(fp=buffer, filename='cat.png')
+					await ctx.send(content='meow', file=img_obj)
 
 	@commands.command(description='A simple command for testing the bot.', 
 			    aliases=['hello', 'salute', 'test'])
