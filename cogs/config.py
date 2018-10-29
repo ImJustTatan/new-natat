@@ -15,7 +15,7 @@ class Configurations:
 
 	@commands.group(name='config', hidden=True,
 			  aliases=['conf', 'cf', 'settings', 'set'])
-	@commands.is_owner()
+	@commands.has_role('Mechanics')
 	async def config(self, ctx):
 		"""Configuration commands. Only the Owners can access them."""
 		if ctx.invoked_subcommand is None:
@@ -23,7 +23,7 @@ class Configurations:
 			await ctx.send(embed=error_embed(error_d))
 
 	@commands.group(aliases=['db','dbg'], hidden=True)
-	@commands.is_owner()
+	@commands.has_role('Mechanics')
 	async def debug(self, ctx):
 		"""Debug commands for debugging bugs."""
 		if ctx.invoked_subcommand is None:
