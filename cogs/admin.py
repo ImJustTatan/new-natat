@@ -37,29 +37,6 @@ class Administration:
 				error_d = 'mention the user dumbass'
 				await ctx.send(embed=error_embed(error_d))
 
-	@admin.command(aliases=['giverole','giveroles'])
-	async def role(self, ctx, member: discord.Member = None, *roles: discord.Role = None):
-	"""Gives or removes roles from an user."""
-	async with ctx.channel.typing():
-		if member is not None:
-			if roles is not None:
-				for role in roles:
-					if role in ctx.guild.roles:
-						if role in member.roles:
-							await member.remove_roles(role)
-						else:
-							await member.add_roles(role)
-					else:
-						error_d = f'"{str(role)}" is not a valid role.'
-						await ctx.send(embed=error_embed(error_d))
-				await ctx.send('done')
-			else:
-				error_d = 'mention the roles fuckass.'
-				await ctx.send(embed=error_embed(error_d))
-		else:
-			error_d = 'specify an user.'
-			await ctx.send(embed=error_embed(error_d))
-		
 	@admin.command(aliases=['massdelete'])
 	async def purge(self, ctx, limit: int = 100, reverse: bool = False):
 		"""Purges a given number of messages."""

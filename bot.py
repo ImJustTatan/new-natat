@@ -10,7 +10,8 @@ import json
 initial_extensions = ['cogs.config',
 			 'cogs.members',
 			 'cogs.useless',
-			 'cogs.apis']
+			 'cogs.apis',
+			 'cogs.admin']
 
 tatanID = 119205994579492864
 adminID = 504803538518671374
