@@ -15,18 +15,19 @@ class Fun:
 	@commands.command(aliases=['randomcat'])
 	async def cat(self, ctx, format: str = None):
 		"""Returns a random image of a cat."""
-		formats = ['png', 'jpg', 'gif']
-		if format is None:
-			format = random.choice(formats)
-		if format in formats:
-			url = f'http://thecatapi.com/api/images/get?type={format}'
-			async with self.session.get(url) as resp:
-				buffer = BytesIO(await resp.read())
-				img = discord.File(fp=buffer, filename=f'cat.{format}')
-				await ctx.send(content='meow',file=img)
-		else:
-			error_d = f'"{format}" is not a valid format, dumbass.'
-			await ctx.send(embed=error_embed(error_d))
+		async with ctx.channel.typing():
+			formats = ['png', 'jpg', 'gif']
+			if format is None:
+				format = random.choice(formats)
+			if format in formats:
+				url = f'http://thecatapi.com/api/images/get?type={format}'
+				async with self.session.get(url) as resp:
+					buffer = BytesIO(await resp.read())
+					img = discord.File(fp=buffer, filename=f'cat.{format}')
+					await ctx.send(content='meow',file=img)
+			else:
+				error_d = f'"{format}" is not a valid format, dumbass.'
+				await ctx.send(embed=error_embed(error_d))
 
 	@commands.command(description='A simple command for testing the bot.', 
 			    aliases=['hello', 'salute', 'test'])
