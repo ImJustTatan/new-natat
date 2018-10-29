@@ -72,7 +72,7 @@ async def on_member_joined(member):
 	else:
 		welcome_message = f'hello {member.name.lower()} and welcome to hr285\'s (aka tatan) server. read the law and have fun.'
 		await member.send(welcome_message)
-	
+
 @bot.event
 async def on_message(msg):
 	# word filter
