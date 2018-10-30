@@ -3,3 +3,4 @@ youtube_dl
 wikipedia
 lyricsgenius
 aiofiles
+beautifulsoup4==4.6.0

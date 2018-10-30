@@ -36,7 +36,8 @@ def get_prefix(bot, message):
 	return commands.when_mentioned_or(*prefixes)(bot, message)
 
 bot = commands.Bot(command_prefix=get_prefix, owner_id=tatanID, 
-				   description='i\'m natat and i am suffering every second i\'m on')
+				   description='i\'m natat and i am suffering every second i\'m on',
+				   case_insensitive=True)
 
 for extension in initial_extensions:
 	bot.load_extension(extension)

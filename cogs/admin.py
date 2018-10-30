@@ -7,7 +7,7 @@ class Administration:
 	def __init__(self, bot):
 		self.bot = bot
 		
-	@commands.group(hidden=True)
+	@commands.group(hidden=True, case_insensitive=True)
 	@commands.has_role('Admins')
 	async def admin(self, ctx):
 		"""Admin commands. Useful for quickly administrating."""
@@ -15,7 +15,7 @@ class Administration:
 			error_d = 'you either didn\'t pass any command or you wrote some fuckin typo'
 			await ctx.send(embed=error_embed(error_d))
 
-	@commands.group(hidden=True)
+	@commands.group(hidden=True, case_insensitive=True)
 	@commands.has_role('Mods')
 	async def mod(self, ctx):
 		"""Moderation commands. Quick shortcuts for moderating stuff."""

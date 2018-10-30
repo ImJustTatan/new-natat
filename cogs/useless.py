@@ -4,17 +4,28 @@ import aiohttp
 
 from useful import error_embed, str_limit
 
+import json
 import random
+import mimetypes
 from io import BytesIO
 
 class Fun:
 	def __init__(self, bot):
 		self.bot = bot
 		self.session = aiohttp.ClientSession(loop=bot.loop)
-		
+
+	@commands.command(aliases=['number'])
+	async def number_fact(self, ctx, number: str = 'random'):
+		"""Returns a random fact about a number.
+		You can optionally provide a number to return a fact from"""
+		async with ctx.channel.typing():
+			async with self.session.get(f'http://numbersapi.com/{number}') as resp:
+				await ctx.send(await resp.text())
+	
 	@commands.command(aliases=['randomcat'])
 	async def cat(self, ctx, format: str = None):
-		"""Returns a random image of a cat."""
+		"""Returns a random image of a cat.
+		You can optionally provide a format."""
 		async with ctx.channel.typing():
 			formats = ['png', 'jpg', 'gif']
 			if format is None:
@@ -39,10 +50,6 @@ class Fun:
 	async def eightball(self, ctx, *args):
 		"""Chooses between infinite number of arguments."""
 		await ctx.send(random.choice(args))
-	@eightball.error
-	async def eightball_error(self, ctx, error):
-		if isinstance(error, commands.BadArgument):
-			await ctx.send('there was an error')
 
 	@commands.command(aliases=['rng','pick'])
 	async def dice(self, ctx, none: int = 1, ntwo: int = 6):

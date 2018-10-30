@@ -25,7 +25,7 @@ class APIs:
 
 	# wikipedia
 	
-	@commands.group(aliases=['wiki','wp'])
+	@commands.group(aliases=['wiki','wp'], case_insensitive=True)
 	async def wikipedia(self, ctx, language: str):
 		"""Wikipedia based command. Do !help wp."""
 		global wiki_lang
@@ -96,7 +96,7 @@ class APIs:
 
 	# genius
 
-	@commands.group(aliases=['g'])
+	@commands.group(aliases=['g'], case_insensitive=True)
 	async def genius(self, ctx):
 		"""For interacting with genius.com. Do !help genius."""
 		if ctx.invoked_subcommand is None:
@@ -104,9 +104,9 @@ class APIs:
 			await ctx.send(embed=error_embed(error_d))
 
 	@genius.command(aliases=['s', 'lyrics'])
-	async def song(self, ctx, *, song_name: str = ""):
+	async def song(self, ctx, *, song_name: str = None):
 		"""Searches a song and returns the lyrics."""
-		if song_name is "":
+		if song_name is None:
 			error_d = 'no search term was passed, asshat'
 			await ctx.send(embed=error_embed(error_d))
 		else:
@@ -134,9 +134,9 @@ class APIs:
 					await ctx.send(embed=song_em)
 
 	@genius.command(aliases=['a'])
-	async def artist(self, ctx, *, artist_name: str = ""):
+	async def artist(self, ctx, *, artist_name: str = None):
 		"""Returns info about a certain given artist."""
-		if artist_name is "":
+		if artist_name is None:
 			error_d = 'you could uh, pass an artist\'s name to do that maybe?'
 			ctx.send(embed=error_embed(error_d))
 		else:
