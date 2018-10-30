@@ -13,11 +13,14 @@ initial_extensions = ['cogs.config',
 			 'cogs.apis',
 			 'cogs.admin']
 
+# user and role IDs
 tatanID = 119205994579492864
 adminID = 504803538518671374
 
+# guild and channel IDs
 guildID = 504412544673251337
 generalID = 504412545134886923
+bot_testID = 505857780087783434
 
 token = os.environ.get('TOKEN')
 if token is None:
@@ -55,10 +58,11 @@ illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'soyboi', 'fagget', '>mfw', '>tfw',
 		   'soi boi']
 
-motd = ['A'*7,'tatan shut me down','how i had die',
+motd = ['A'*9,'oye tatan','juguemos mario land',
 		'oh no', 'hell yeah', 'lmao imagine if',
 		'ran out of motds what do', 'aka Stuart "Fucking" Little',
-		'spook time', 'the cMAMA QUE CHUCHA']
+		'spook time', 'the cMAMA QUE CHUCHA', '>exists',
+		'the fuck is a "furry"', 'god i hate mondays']
 
 async def status_task(sec=1200):
 	"""Changes status every X seconds."""
@@ -74,6 +78,8 @@ async def on_ready():
 	print(bot.user.id)
 	print('------')
 	bot.loop.create_task(status_task())
+	bot_channel = bot.get_channel(bot_testID)
+	await bot_channel.send('hello me bac')
 	
 @bot.event
 async def on_member_join(member):
@@ -86,11 +92,12 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
 	general = bot.get_channel(generalID)
-	rip_list = ['rest in peace.', 'rip.', 'press F', 'lol bye',
+	rip_list = ['rest in peace.', 'rip.', 'press f', 'lol bye',
 				'who needed him anyways', 'holy shit is he dead???',
 				'what a loser', '\n>dude leaves', 'who was he again']
 	rip_msg = random.choice(rip_list)
-	await general.send(f'{member.name} left the server. {rip_msg}')
+	sent_msg = await general.send(f'{member.name} left the server. {rip_msg}')
+	await sent_msg.add_reaction('\U0001F1EB')
 
 @bot.event
 async def on_message(msg):
