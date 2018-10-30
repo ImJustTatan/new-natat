@@ -15,7 +15,9 @@ initial_extensions = ['cogs.config',
 
 tatanID = 119205994579492864
 adminID = 504803538518671374
+
 guildID = 504412544673251337
+generalID = 504412545134886923
 
 token = os.environ.get('TOKEN')
 if token is None:
@@ -23,13 +25,21 @@ if token is None:
 		config = json.load(j)
 		token = config['token']
 
-bot = commands.Bot(command_prefix='!', owner_id=tatanID, 
+def get_prefix(bot, message):
+	"""Callable prefix function. [TODO] Can be modified at will."""
+	prefixes = ['>', '!','.']
+	if not message.guild:
+		return ''
+	return commands.when_mentioned_or(*prefixes)(bot, message)
+
+bot = commands.Bot(command_prefix=get_prefix, owner_id=tatanID, 
 				   description='i\'m natat and i am suffering every second i\'m on')
 
 for extension in initial_extensions:
 	bot.load_extension(extension)
 
-tatanID = bot.get_user(tatanID)
+tatan = bot.get_user(tatanID)
+general = bot.get_channel(generalID)
 
 cpasta = os.environ.get('COPYPASTA')
 if cpasta is None:
@@ -66,19 +76,23 @@ async def on_ready():
 	bot.loop.create_task(status_task())
 	
 @bot.event
-async def on_member_joined(member):
+async def on_member_join(member):
 	if 'discord.gg' in member.name.lower():
 		await member.ban(reason='spambot')
 	else:
-		welcome_message = f'hello {member.name.lower()} and welcome to hr285\'s (aka tatan) server. read the law and have fun.'
+		welcome_message = f'hello {member.name.lower()} and welcome to tatan\'s server. read the law and have fun.'
 		await member.send(welcome_message)
+		
+@bot.event
+async def on_member_remove(member):
+	general.send(f'`{str(member)}` left the server.')
 
 @bot.event
 async def on_message(msg):
 	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
-			if msg.author != bot.user:
+			if msg.author != bot.user and msg.author != tatan:
 				await msg.channel.send(random.choice([':gun:', ':knife:', ':dagger:']))
 				await msg.author.send(random.choice(fyou))
 				await msg.delete()
