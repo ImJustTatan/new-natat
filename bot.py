@@ -57,7 +57,8 @@ illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 
 motd = ['A'*7,'tatan shut me down','how i had die',
 		'oh no', 'hell yeah', 'lmao imagine if',
-		'ran out of motds what do', 'aka Stuart "Fucking" Little']
+		'ran out of motds what do', 'aka Stuart "Fucking" Little',
+		'spook time', 'the cMAMA QUE CHUCHA']
 
 async def status_task(sec=1200):
 	"""Changes status every X seconds."""
@@ -85,7 +86,11 @@ async def on_member_join(member):
 @bot.event
 async def on_member_remove(member):
 	general = bot.get_channel(generalID)
-	await general.send(f'`{member.name}` left the server. rip')
+	rip_list = ['rest in peace.', 'rip.', 'press F', 'lol bye',
+				'who needed him anyways', 'holy shit is he dead???',
+				'what a loser', '\n>dude leaves', 'who was he again']
+	rip_msg = random.choice(rip_list)
+	await general.send(f'{member.name} left the server. {rip_msg}')
 
 @bot.event
 async def on_message(msg):
