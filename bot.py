@@ -38,9 +38,6 @@ bot = commands.Bot(command_prefix=get_prefix, owner_id=tatanID,
 for extension in initial_extensions:
 	bot.load_extension(extension)
 
-tatan = bot.get_user(tatanID)
-general = bot.get_channel(generalID)
-
 cpasta = os.environ.get('COPYPASTA')
 if cpasta is None:
 	with open('config.json') as j:
@@ -87,10 +84,12 @@ async def on_member_join(member):
 		
 @bot.event
 async def on_member_remove(member):
+	general = bot.get_channel(generalID)
 	await general.send(f'`{member.name}` left the server. rip')
 
 @bot.event
 async def on_message(msg):
+	tatan = bot.get_user(tatanID)
 	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
