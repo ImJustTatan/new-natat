@@ -50,7 +50,7 @@ if cpasta is None:
 
 fyou = ['fuck off', 'fuck you',
 	 'stop it', 'im gonna kill you',
-	 'that\'s fuckin illegal man',
+		'that\'s fuckin illegal man',
 	 'can you not', 'STOP', cpasta]
 
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
@@ -58,7 +58,9 @@ illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'soyboi', 'fagget', '>mfw', '>tfw',
 		   'soi boi']
 
-motd = ['A'*7,'tatan shut me down','how i had die']
+motd = ['A'*7,'tatan shut me down','how i had die',
+		'oh no', 'hell yeah', 'lmao imagine if',
+		'ran out of motds what do', 'aka Stuart "Fucking" Little']
 
 async def status_task(sec=1200):
 	"""Changes status every X seconds."""
@@ -85,7 +87,7 @@ async def on_member_join(member):
 		
 @bot.event
 async def on_member_remove(member):
-	await general.send(f'`{str(member)}` left the server.')
+	await general.send(f'`{member.name}` left the server. rip')
 
 @bot.event
 async def on_message(msg):
