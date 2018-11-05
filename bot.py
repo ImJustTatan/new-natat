@@ -57,7 +57,7 @@ fyou = ['fuck off', 'fuck you',
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'v:', 'kek', 'soy boy' 'soy boi',
 		   'soyboi', 'fagget', '>mfw', '>tfw',
-		   'soi boi']
+		   'soi boi', 'fuck', 'the game']
 
 motd = ['A'*9,'oye tatan','juguemos mario land',
 		'oh no', 'hell yeah', 'lmao imagine if',
