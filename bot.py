@@ -57,7 +57,7 @@ fyou = ['fuck off', 'fuck you',
 illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
 		   'v:', 'kek', 'soy boy' 'soy boi',
 		   'soyboi', 'fagget', '>mfw', '>tfw',
-		   'soi boi', 'fuck', 'the game']
+		   'soi boi']
 
 motd = ['A'*9,'oye tatan','juguemos mario land',
 		'oh no', 'hell yeah', 'lmao imagine if',
@@ -106,7 +106,7 @@ async def on_message(msg):
 	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
-			if msg.author != bot.user and msg.author != tatan:
+			if msg.author != bot.user:
 				await msg.channel.send(random.choice([':gun:', ':knife:', ':dagger:']))
 				await msg.author.send(random.choice(fyou))
 				await msg.delete()
