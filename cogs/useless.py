@@ -9,7 +9,7 @@ import random
 import mimetypes
 from io import BytesIO
 
-class Fun(commands.Cog):
+class Fun:
 	def __init__(self, bot):
 		self.bot = bot
 		self.session = aiohttp.ClientSession(loop=bot.loop)

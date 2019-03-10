@@ -3,7 +3,7 @@ from discord.ext import commands
 
 from useful import error_embed
 
-class Administration(commands.Cog):
+class Administration:
 	def __init__(self, bot):
 		self.bot = bot
 		
