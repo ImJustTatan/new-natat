@@ -9,7 +9,7 @@ log/
 *.mp3
 *.webm
 *.dll
-*.json
+config.json
 
 # C extensions
 *.so

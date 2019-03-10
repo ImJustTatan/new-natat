@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from useful import error_embed
+
 import os # for env vars
 import random
 import asyncio
@@ -13,14 +15,9 @@ initial_extensions = ['cogs.config',
 			 'cogs.apis',
 			 'cogs.admin']
 
-# user and role IDs
-tatanID = 119205994579492864
-adminID = 504803538518671374
 
-# guild and channel IDs
-guildID = 504412544673251337
-generalID = 504412545134886923
-bot_testID = 505857780087783434
+with open('ids.json') as j:
+	ids = json.load(j)
 
 token = os.environ.get('TOKEN')
 if token is None:
@@ -30,12 +27,12 @@ if token is None:
 
 def get_prefix(bot, message):
 	"""Callable prefix function. [TODO] Can be modified at will."""
-	prefixes = ['>', '!','.']
+	prefixes = ['>','!','.']
 	if not message.guild:
 		return ''
 	return commands.when_mentioned_or(*prefixes)(bot, message)
 
-bot = commands.Bot(command_prefix=get_prefix, owner_id=tatanID, 
+bot = commands.Bot(command_prefix=get_prefix, owner_id=ids["tatan"], 
 				   description='i\'m natat and i am suffering every second i\'m on',
 				   case_insensitive=True)
 
@@ -79,7 +76,7 @@ async def on_ready():
 	print(bot.user.id)
 	print('------')
 	bot.loop.create_task(status_task())
-	bot_channel = bot.get_channel(bot_testID)
+	bot_channel = bot.get_channel(ids["bot-test"])
 	await bot_channel.send('hello me bac')
 	
 @bot.event
@@ -92,7 +89,7 @@ async def on_member_join(member):
 		
 @bot.event
 async def on_member_remove(member):
-	general = bot.get_channel(generalID)
+	general = bot.get_channel(ids["general"])
 	rip_list = ['rest in peace.', 'rip.', 'press f', 'lol bye',
 				'who needed him anyways', 'holy shit is he dead???',
 				'what a loser', '\n>dude leaves', 'who was he again']
@@ -102,7 +99,7 @@ async def on_member_remove(member):
 
 @bot.event
 async def on_message(msg):
-	tatan = bot.get_user(tatanID)
+	tatan = bot.get_user(ids["tatan"])
 	# word filter
 	for word in illegal_words:
 		if word in msg.content.lower():
@@ -110,6 +107,9 @@ async def on_message(msg):
 				await msg.channel.send(random.choice([':gun:', ':knife:', ':dagger:']))
 				await msg.author.send(random.choice(fyou))
 				await msg.delete()
+
+				dm = error_embed(error_desc=msg.content,error_title=f'{msg.author.name} said:')
+				await tatan.send(embed=dm)
 			else:
 				pass
 	

@@ -5,7 +5,7 @@ import aiohttp
 from io import BytesIO
 import random
 
-class Members:
+class Members(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.session = aiohttp.ClientSession(loop=bot.loop)

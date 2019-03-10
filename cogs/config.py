@@ -4,11 +4,15 @@ import aiohttp
 
 from useful import error_embed
 
+import json
 import random
 import mimetypes
 from io import BytesIO
 
-class Configurations:
+with open('ids.json') as j:
+	ids = json.load(j)
+
+class Configurations(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.session = aiohttp.ClientSession(loop=bot.loop)
@@ -43,7 +47,13 @@ class Configurations:
 
 						content_type = resp.headers['content-type']
 						ext = mimetypes.guess_extension(content_type)
-						avatar_file = discord.File(fp=buffer, filename=f'avatar.{ext}')
+
+						if ext.endswith('jpe'):
+							n_ext = '.jpeg'
+						else:
+							n_ext = ext
+
+						avatar_file = discord.File(fp=buffer, filename=f'avatar{n_ext}')
 
 						await self.bot.user.edit(avatar=await resp.read())
 						await ctx.send('new avatar set to:', file=avatar_file)
@@ -77,7 +87,47 @@ class Configurations:
 		await ctx.message.delete()
 		await ctx.send(message)
 
-	@config.command(aliases=['cl','sleep', 'exit'])
+	@commands.is_owner()
+	@commands.command(aliases=['ds', 'ass'], hidden=True)
+	async def dev_say(self, ctx, channel_name: str = str(ids['announcements']), 
+			*, echo: str = None):
+		"""Echoes a given message to the select text channels in ids.json."""
+		if channel_name in ids and echo is not None:
+			target_channel = self.bot.get_channel(ids[channel_name])
+			attachments = ctx.message.attachments
+			if attachments:
+				img = random.choice(attachments)
+				async with self.session.get(img.url) as resp:
+					buffer = BytesIO(await resp.read())
+
+					content_type = resp.headers['content-type']
+					ext = mimetypes.guess_extension(content_type)
+
+					if ext.endswith('jpe'):
+						n_ext = '.jpeg'
+					elif ext.endswith('mp2'):
+						n_ext = '.mp3'
+					else:
+						n_ext = ext
+
+					img_file = discord.File(fp=buffer, filename=f'attached{n_ext}')
+					
+					await target_channel.send(echo, file=img_file)
+			else:
+				await target_channel.send(echo)
+				
+			await ctx.send("ok")
+
+		elif channel_name not in ids or echo is None:
+			if echo is None:
+				error_d = error_embed('the fuck do i send dumbass')
+			else:
+				error_d = error_embed('specified channel is not in ids.json\
+					\n tatan you dumb idiot')
+			await ctx.send(embed=error_d)
+
+	@commands.is_owner()
+	@commands.command(aliases=['cl','sleep', 'exit'], hidden=True)
 	async def close(self, ctx):
 		"""Shuts down the bot."""
 		await ctx.send('ima go bye')
