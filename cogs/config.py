@@ -12,7 +12,7 @@ from io import BytesIO
 with open('ids.json') as j:
 	ids = json.load(j)
 
-class Configurations:
+class Configurations(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.session = aiohttp.ClientSession(loop=bot.loop)

@@ -19,7 +19,7 @@ genius_api = genius.Genius(genius_token)
 
 wiki_lang = 'en'
 
-class APIs:
+class APIs(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
