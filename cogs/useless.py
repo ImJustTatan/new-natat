@@ -9,6 +9,9 @@ import random
 import mimetypes
 from io import BytesIO
 
+with open('ids.json') as j:
+	ids = json.load(j)
+
 class Fun(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
@@ -55,6 +58,22 @@ class Fun(commands.Cog):
 	async def dice(self, ctx, none: int = 1, ntwo: int = 6):
 		"""A dice with custom numbers."""
 		await ctx.send(f'your lucky number is {random.randint(none, ntwo)}')
+
+	@commands.command(aliases=['naenae'])
+	async def dab(self, ctx):
+		"""*dabs*"""
+		mojis = ctx.guild.emojis
+		moji = random.choice(mojis)
+		await ctx.send(f'{moji} dab!!!')
+
+	@commands.command(aliases=['yeet'])
+	async def dance(self, ctx):
+		"""*dances*"""
+		moji_guild = self.bot.get_guild(ids["guild-test"])
+		mojis = moji_guild.emojis
+		moji = random.choice(mojis)
+		statement = random.choice(['yeet', 'dance'])
+		await ctx.send(f'{moji} {statement}!!!!!')
 
 def setup(bot):
 	bot.add_cog(Fun(bot))

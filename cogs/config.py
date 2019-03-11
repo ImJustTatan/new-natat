@@ -92,7 +92,7 @@ class Configurations(commands.Cog):
 	async def dev_say(self, ctx, channel_name: str = str(ids['announcements']), 
 			*, echo: str = None):
 		"""Echoes a given message to the select text channels in ids.json."""
-		if channel_name in ids and echo is not None:
+		if channel_name in ids:
 			target_channel = self.bot.get_channel(ids[channel_name])
 			attachments = ctx.message.attachments
 			if attachments:
@@ -112,7 +112,10 @@ class Configurations(commands.Cog):
 
 					img_file = discord.File(fp=buffer, filename=f'attached{n_ext}')
 					
-					await target_channel.send(echo, file=img_file)
+					if echo is not None:
+						await target_channel.send(echo, file=img_file)
+					else:
+						await target_channel.send(file=img_file)
 			else:
 				await target_channel.send(echo)
 				
