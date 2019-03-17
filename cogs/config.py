@@ -89,45 +89,36 @@ class Configurations(commands.Cog):
 
 	@commands.is_owner()
 	@commands.command(aliases=['ds', 'ass'], hidden=True)
-	async def dev_say(self, ctx, channel_name: str = str(ids['announcements']), 
+	async def dev_say(self, ctx, channel_name: str = 'announcements', 
 			*, echo: str = None):
 		"""Echoes a given message to the select text channels in ids.json."""
-		if channel_name in ids:
-			target_channel = self.bot.get_channel(ids[channel_name])
-			attachments = ctx.message.attachments
-			if attachments:
-				img = random.choice(attachments)
-				async with self.session.get(img.url) as resp:
-					buffer = BytesIO(await resp.read())
+		target_channel = discord.utils.get(self.bot.get_all_channels(), name=channel_name)
+		attachments = ctx.message.attachments
+		if attachments:
+			img = random.choice(attachments)
+			async with self.session.get(img.url) as resp:
+				buffer = BytesIO(await resp.read())
 
-					content_type = resp.headers['content-type']
-					ext = mimetypes.guess_extension(content_type)
+				content_type = resp.headers['content-type']
+				ext = mimetypes.guess_extension(content_type)
 
-					if ext.endswith('jpe'):
-						n_ext = '.jpeg'
-					elif ext.endswith('mp2'):
-						n_ext = '.mp3'
-					else:
-						n_ext = ext
+				if ext.endswith('jpe'):
+					n_ext = '.jpeg'
+				elif ext.endswith('mp2'):
+					n_ext = '.mp3'
+				else:
+					n_ext = ext
 
-					img_file = discord.File(fp=buffer, filename=f'attached{n_ext}')
-					
-					if echo is not None:
-						await target_channel.send(echo, file=img_file)
-					else:
-						await target_channel.send(file=img_file)
-			else:
-				await target_channel.send(echo)
+				img_file = discord.File(fp=buffer, filename=f'attached{n_ext}')
 				
-			await ctx.send("ok")
-
-		elif channel_name not in ids or echo is None:
-			if echo is None:
-				error_d = error_embed('the fuck do i send dumbass')
-			else:
-				error_d = error_embed('specified channel is not in ids.json\
-					\n tatan you dumb idiot')
-			await ctx.send(embed=error_d)
+				if echo is not None:
+					await target_channel.send(echo, file=img_file)
+				else:
+					await target_channel.send(file=img_file)
+		else:
+			await target_channel.send(echo)
+				
+		await ctx.send("ok")
 
 	@commands.is_owner()
 	@commands.command(aliases=['cl','sleep', 'exit'], hidden=True)
