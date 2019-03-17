@@ -66,10 +66,10 @@ class Members(commands.Cog):
 				img_file = discord.File(fp=buffer, filename=f'attached{n_ext}')
 				
 				if echo is not None:
-					await tatan.send(f'{echo}\n`sent by {ctx.author.display_name}`', 
+					await tatan.send(f'{echo}\n`sent by {ctx.author.display_name} in {ctx.channel.name}`', 
 							file=img_file)
 				else:
-					await tatan.send(f'`sent by {ctx.author.display_name}`', 
+					await tatan.send(f'`sent by {ctx.author.display_name} in {ctx.channel.name}`', 
 							file=img_file)
 				await ctx.send(':+1: mailed to tatan :)')
 				
@@ -77,7 +77,7 @@ class Members(commands.Cog):
 			error_d = error_embed('can you uh gimme a message or an image or somethin\'')
 			await ctx.send(embed=error_d)
 		else:
-			await tatan.send(f'{echo}\n`sent by {ctx.author.display_name}`')
+			await tatan.send(f'{echo}\n`sent by {ctx.author.display_name} in {ctx.channel.name}`')
 			await ctx.send(':+1: mailed to tatan :)')
 
 def setup(bot):
