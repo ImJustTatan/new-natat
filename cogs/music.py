@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+from useful import error_embed
+
 import asyncio
 import itertools, datetime
 import sys
@@ -335,7 +337,13 @@ class Music(commands.Cog):
 
         return player
 
-    @commands.command(name='connect', aliases=['join', 'j'])
+    @commands.group(aliases=['mu'])
+    async def music(self, ctx):
+        if ctx.invoked_subcommand is None:
+            error_d = 'no recognizable music command was called'
+            await ctx.send(embed=error_embed(error_d))
+
+    @music.command(name='connect', aliases=['join', 'j'])
     async def connect_(self, ctx, *, channel: discord.VoiceChannel=None):
         """Connect to voice.
 
@@ -370,7 +378,7 @@ class Music(commands.Cog):
 
         await ctx.send(f":notes: Connected to channel: **{channel}**", delete_after=20)
         
-    @commands.command(name='play', aliases=['sing', 'p'])
+    @music.command(name='play', aliases=['sing', 'p'])
     async def play_(self, ctx, *, search: str):
         """Request a song and add it to the queue.
 
@@ -399,7 +407,7 @@ class Music(commands.Cog):
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
         await player.queue.put(source)
 
-    @commands.command(name='now_playing', aliases=['np', 'current', 'currentsong', 'playing'])
+    @music.command(name='now_playing', aliases=['np', 'current', 'currentsong', 'playing'])
     async def now_playing_(self, ctx):
         """Display information about the currently playing song."""
 
