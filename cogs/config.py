@@ -128,14 +128,14 @@ class Configurations(commands.Cog):
 		exit()
 
 	@debug.command(aliases=['load'])
-	async def cog_load(self, ctx, *, cog: str):
+	async def crogg_load(self, ctx, *, crogg: str):
 		"""Loads a module/cog."""
-		self.bot.load_extension(cog)
+		self.bot.load_extension(crogg)
 
 	@debug.command(aliases=['unload'])
-	async def cog_unload(self, ctx, *, cog: str):
+	async def crogg_unload(self, ctx, *, crogg: str):
 		"""Unloads a module/cog."""
-		self.bot.unload_extension(cog)
+		self.bot.unload_extension(crogg)
 
 def setup(bot):
 	bot.add_cog(Configurations(bot))

@@ -13,7 +13,8 @@ initial_extensions = ['cogs.config',
 			 'cogs.members',
 			 'cogs.useless',
 			 'cogs.apis',
-			 'cogs.admin']
+			 'cogs.admin',
+			 'cogs.music']
 
 
 with open('ids.json') as j:
@@ -51,10 +52,9 @@ fyou = ['fuck off', 'fuck you',
 		'that\'s fuckin illegal man',
 	 'can you not', 'STOP', cpasta]
 
-illegal_words = [':v', 'nigger', 'faggot', 'soyboy',
-		   'v:', 'kek', 'soy boy' 'soy boi',
-		   'soyboi', 'fagget', '>mfw', '>tfw',
-		   'soi boi']
+illegal_words = [':v', 'soyboy', 'v:', 'kek',
+		   'soy boy' 'soy boi', 'soyboi', 'fagget', 
+		   '>mfw', '>tfw', 'soi boi']
 
 motd = ['A'*9,'oye tatan','juguemos mario land',
 		'oh no', 'hell yeah', 'lmao imagine if',
