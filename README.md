@@ -1,3 +1,5 @@
+**project discontinued:** i killed natat to focus on a new java bot currently codenamed honeybee. this repo will serve archival purposes only.
+
 # new-natat
 my new version of natat, no longer documented. this repo is for hosting and backup's sake.
 
